@@ -12,7 +12,11 @@ int main(int argc, char *argv[])
 											"org.a11y.Bus",
 											"GetAddress");
 	QDBusMessage reply = QDBusConnection::sessionBus().call(m);
+	QString address = reply.arguments().at(0).toString();
+	printf("Accessibility Bus found at : %s\n",qPrintable(address));
 
-	printf("Accessibility Bus found at : %s\n",qPrintable(reply.arguments().at(0).toString()));
+	QDBusConnection a11y = QDBusConnection::connectToBus(address,"a11y");
+
+
 	return app.exec();
 }
