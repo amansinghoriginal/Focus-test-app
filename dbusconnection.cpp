@@ -1,9 +1,9 @@
 #include "dbusconnection.h"
-
+#include <stdio.h>
+#include <QtDBus>
 DBusConnection::DBusConnection()
-{
-	dbusConnection = connectDBus();
-}
+	:dbusConnection(connectDBus())
+{}
 
 QString DBusConnection::getAccessibilityBusAddress() const
 {
@@ -20,6 +20,14 @@ QString DBusConnection::getAccessibilityBusAddress() const
 QDBusConnection DBusConnection::connectDBus() const
 {
 	QString busAddress = getAccessibilityBusAddress();
+	if(busAddress.isEmpty())
+		printf("Hallelujah");
+	else printf("%s\n",qPrintable(busAddress));
 
 	return QDBusConnection::connectToBus(busAddress,"a11y");
+}
+
+QDBusConnection DBusConnection::connection() const
+{
+	return dbusConnection;
 }

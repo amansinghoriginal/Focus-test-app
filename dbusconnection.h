@@ -6,10 +6,10 @@
 
 class DBusConnection
 {
-	Q_OBJECT
 public:
 	DBusConnection();
 	QDBusConnection connection() const;
+
 private:
 	QString getAccessibilityBusAddress() const;
 	QDBusConnection connectDBus() const;
